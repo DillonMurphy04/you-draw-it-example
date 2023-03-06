@@ -6,7 +6,7 @@
 
 
 // define variable system_font
- const system_font = `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color // // Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`;
+const system_font = `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color // // Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`;
 
 
 // ---------------------------------------------------------------------------------------------
@@ -98,6 +98,7 @@ function start_drawer(state, reset = true){
     // start with the svg object provided by r2d3
     // multiassign where setup_drawable_points is grabbing the parameters it needs from state: data, freedraw and draw_start
     state.drawable_points = setup_drawable_points(state);
+    state.svg.selectAll("text#tip").filter(":not(:empty)").remove();;
   }
   
   // if we have points, we draw user's line.
@@ -150,7 +151,9 @@ function start_drawer(state, reset = true){
           console.log(`Sending message to ${state.shiny_message_loc}`);
         }
       }
+      state.svg.selectAll("text#tip").filter(":not(:empty)").remove();;
     }
+    
   };
   
   setup_draw_watcher(state.svg, scales, on_drag, on_end);
@@ -228,7 +231,7 @@ function draw_points({svg, point_data, points_end, points}, scales){
 }
 
 function draw_rectangle({svg, drawable_points, line_data, draw_start, width, height, free_draw, x_by}, scales){
-
+  const last_point = drawable_points[drawable_points.length - 1]
 
     if(get_user_line_status(state) === 'unstarted'){
       if(free_draw){
@@ -251,8 +254,29 @@ function draw_rectangle({svg, drawable_points, line_data, draw_start, width, hei
         var xmax = line_data[len].x
         var drawSpace_start = scales.x(xmin)
         var drawSpace_end   = scales.x(xmax)
+        
+        if (last_point.x > xmin * 2){      
+          if (state.svg.select('#tip').empty()) {
+            state.svg.append('text')
+            .attr('id', 'tip')
+            .attr('x', state.w / 2)
+            .attr('y', margin.top)
+            .attr('dominant-baseline', 'hanging')
+            .style('font-size', '1.75rem')
+            .style('font-family', 'Times New Roman')
+            .style('fill', "red")
+            .style('text-anchor', 'middle')
+            .text("Remember to go slow! Orange region shows progress.");
+      }
+          
+        }
+      else {
+        state.svg.selectAll("text#tip").filter(":not(:empty)").remove();
+      }
+
       }
     }
+    
 
     const draw_region = state.svg.selectAppend("rect");
 
@@ -263,7 +287,7 @@ function draw_rectangle({svg, drawable_points, line_data, draw_start, width, hei
       .attr("height", state.h)
       //.style("fill", "#e0f3f3")
       .style("fill-opacity", 0.4)
-      .style("fill", "rgba(255,255,0,.8)")
+      .style("fill", "rgba(255,165,0,.8)")
   
 }
 
@@ -284,7 +308,7 @@ function draw_user_line(state, scales){
       .at(default_line_attrs)
       .attr('stroke', drawn_line_color)
       .attr("d", scales.line_drawer)
-      .style("stroke-dasharray", ("1, 7"));
+      .style("stroke-dasharray", ("15, 10, 5, 10"));
 }
 
 function draw_finished_line({svg, line_data, draw_start, free_draw}, scales){
@@ -330,6 +354,7 @@ if(last_dist - current_dist < 0) {
   break;
 }
 last_dist = current_dist;
+
 }
 
 drawable_points[closest_index].y = drag_y;
@@ -454,3 +479,4 @@ function setup_scales(state){
     line_drawer,
   };
 }
+

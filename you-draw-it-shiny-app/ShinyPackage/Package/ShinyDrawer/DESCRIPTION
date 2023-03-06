@@ -1,0 +1,14 @@
+Package: ShinyDrawer
+Title: A package that passes a R CMD check for CRAN which contains the
+    provided shiny_drawer() R function
+Version: 0.0.0.6
+Authors@R: 
+    person("Dillon", "Murphy", , "patrickdillonmurphy@gmail.com", role = c("aut", "cre"))
+Description: This is a bare-bones package that passed the medium test for
+    the Interactive graphics with ‘You Draw It’ GSOC application.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+LitrVersionUsed: 0.7.0
+LitrId: f8055882f9be803d4e96056532ece696

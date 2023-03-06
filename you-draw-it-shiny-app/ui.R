@@ -21,7 +21,7 @@ ui <- navbarPage(
     fluidRow(
       column(
         width = 12,
-        helpText(h4("Use your mouse to fill in the trend in the yellow box region")),
+        helpText(h4("Use your mouse to fill in the trend in the orange box region")),
         d3Output("shinydrawr", height = "500px"),
         br(),
         actionButton("reset", "Reset")

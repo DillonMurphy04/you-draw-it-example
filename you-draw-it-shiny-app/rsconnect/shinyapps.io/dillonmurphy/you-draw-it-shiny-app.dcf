@@ -1,0 +1,14 @@
+name: you-draw-it-shiny-app
+title:
+username:
+account: dillonmurphy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8451492
+bundleId: 6914346
+url: https://dillonmurphy.shinyapps.io/you-draw-it-shiny-app/
+when: 1677900689.0431
+lastSyncTime: 1677900689.04313
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: ShinyApp.qmd|ShinyPackage
