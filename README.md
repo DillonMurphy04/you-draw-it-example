@@ -1,8 +1,8 @@
-# 'You Draw It' -- Example
-
-**Completed All 3 Tests**
+# Completed All 3 Tests
 
 **Deployed Link:** https://dillonmurphy.shinyapps.io/you-draw-it-shiny-app/
+
+# 'You Draw It' -- Example
  
  **Summary:** Simple RShiny application example for the 'You Draw It' feature.
  
