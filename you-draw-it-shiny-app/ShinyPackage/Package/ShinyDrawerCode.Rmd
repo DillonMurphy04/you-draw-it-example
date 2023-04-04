@@ -103,7 +103,7 @@ shiny_drawer <- function(data,
   }
   
   r2d3::r2d3(data   = data_to_json(data), 
-             script = "www/you-draw-it.js",
+             script = system.file("you-draw-it.js", package = "ShinyDrawer"),
              d3_version = "5",
              dependencies = c("d3-jetpack"),
              options = list(draw_start        = draw_start, 
